@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Flower">
+      <UniqueIdentifier>{adb768b7-042b-4a98-b0d5-7da8ac9669a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exception">
+      <UniqueIdentifier>{679cdb2e-390f-459f-bdfd-0a1cc21aea33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{8a9102d2-7686-4227-8f8e-8d7bf26ad285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bee">
+      <UniqueIdentifier>{21a28d60-e78f-4332-b46f-c00303685f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AngryBee">
+      <UniqueIdentifier>{3ca909b2-a757-4393-9960-e418f7af5192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Flower1">
+      <UniqueIdentifier>{c43b117d-c608-40c7-b076-a79454fda4ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Flower2">
+      <UniqueIdentifier>{baf2b19b-f887-44f3-8284-50eeca5a0428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Flower3">
+      <UniqueIdentifier>{24e1fb2d-a24f-4156-aba0-cbc5856bd126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Flower4">
+      <UniqueIdentifier>{cfb1151b-e1c5-4c59-a8a1-bd37e6d80753}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Proiect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <Filter>Source Files\Flower</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Bee.cpp">
+      <Filter>Source Files\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="AngryBee.cpp">
+      <Filter>Source Files\AngryBee</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower1.cpp">
+      <Filter>Source Files\Flower1</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower2.cpp">
+      <Filter>Source Files\Flower2</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower3.cpp">
+      <Filter>Source Files\Flower3</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower4.cpp">
+      <Filter>Source Files\Flower4</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\Users\cojoc\Downloads\poza1bun.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Flower.h">
+      <Filter>Source Files\Flower</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Source Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Bee.h">
+      <Filter>Source Files\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="AngryBee.h">
+      <Filter>Source Files\AngryBee</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower1.h">
+      <Filter>Source Files\Flower1</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower2.h">
+      <Filter>Source Files\Flower2</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower3.h">
+      <Filter>Source Files\Flower3</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower4.h">
+      <Filter>Source Files\Flower4</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
