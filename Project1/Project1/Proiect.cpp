@@ -188,7 +188,7 @@ biblioteca standard <algorithm>.
      sort(v.rbegin(), v.rend());
 
 
-• Utilizați în mod corespunzător două tipuri diferite de smart pointers din
+✅• Utilizați în mod corespunzător două tipuri diferite de smart pointers din
 biblioteca standard (se acordă un punct dacă ați folosit corect un tip de smart
 pointers, două puncte dacă ați folosit două tipuri diferite). (2p)
 Prin smart pointer ne referim la una dintre clasele std::reference_wrapper1,
@@ -198,9 +198,10 @@ din codul vostru.
 Referințe utile: avantajele smart pointers, utilizarea smart pointers în C++.
 Oficiu (1p)
          std::vector<std::unique_ptr<Bee>> bees;
+         std::shared_ptr<Ladybug> bug = std::make_shared<Ladybug>();
+        std::shared_ptr<Ladybug> bug2 = std::make_shared<Ladybug>();
 
-
-Bonus - ai asta dar trebuie sa o configurezi
+✅1/2Bonus
 Utilizați în proiectul vostru o bibliotecă externă (alta decât biblioteca standard).
 Poate să ofere orice fel de funcționalitate care se potrivește cu nevoile temei voastre:
 interfață grafică, animații, audio, importarea/exportul datelor în diferite formate, conectarea la o bază de date, conexiuni pe rețea, interacțiune cu hardware-ul,
