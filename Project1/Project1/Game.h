@@ -5,6 +5,7 @@
 #include "Flower.h"
 #include "Bee.h"
 #include "AngryBee.h"
+#include "Ladybug.h"
 #include "Player.h"
 
 class Game {
@@ -16,7 +17,7 @@ private:
     const float angularVelocity = 2 * 3.141592653589793 / 2;
     std::vector<std::vector<sf::RectangleShape>> grid;
     std::vector<std::vector<Flower*>> flori;
-    std::vector<Bee*> bees;
+    std::vector<std::unique_ptr<Bee>> bees;
     sf::View view;
     sf::Font font;
     float angle;
@@ -28,6 +29,8 @@ private:
     sf::Text moneyText;
     bool debug = false;
     std::map<std::pair<int, int>, int>pozitiiAdaugate;
+    std::vector<int>liniiSpawn;
+    std::vector<std::reference_wrapper<Ladybug>> bugs;
 
 public:
     template <typename T1, typename T2>

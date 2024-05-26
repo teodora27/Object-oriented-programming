@@ -180,10 +180,13 @@ Exemple: vector, array, list, set, map etc.
      std::map<std::pair<int, int>, int>pozitiiAdaugate;
      std::vector<std::vector<Flower*>> flori;
 
-• Utilizați minim două funcții utilitare diferite din biblioteca standard (funcții libere, nu metode ale claselor din STL). (1p)
+✅• Utilizați minim două funcții utilitare diferite din biblioteca standard (funcții libere, nu metode ale claselor din STL). (1p)
 Exemple: sort, find, search, all_of/any_of/none_of, accumulate,
 fill, generate, copy, reverse, orice alte funcții din fișierul header din
 biblioteca standard <algorithm>.
+     auto it = find(liniiSpawn.begin(), liniiSpawn.end(), v[0]);
+     sort(v.rbegin(), v.rend());
+
 
 • Utilizați în mod corespunzător două tipuri diferite de smart pointers din
 biblioteca standard (se acordă un punct dacă ați folosit corect un tip de smart
@@ -194,6 +197,8 @@ Puteți să folosiți aceste clase în locul referințelor sau pointerilor obiș
 din codul vostru.
 Referințe utile: avantajele smart pointers, utilizarea smart pointers în C++.
 Oficiu (1p)
+         std::vector<std::unique_ptr<Bee>> bees;
+
 
 Bonus - ai asta dar trebuie sa o configurezi
 Utilizați în proiectul vostru o bibliotecă externă (alta decât biblioteca standard).

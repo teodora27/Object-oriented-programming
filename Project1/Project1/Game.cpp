@@ -4,11 +4,13 @@
 #include "Flower3.h"
 #include "Flower4.h"
 #include "Player.h"
+#include "Ladybug.h"
 #include "FlowerFactory.h"
 #include <iostream>
 #include <random>
 #include <cmath>
 #include "DebugInfo.h"
+#include <vector>
 
 
 using namespace sf;
@@ -91,15 +93,29 @@ void Game::MoneyTextSetter() {
 }
 
 void Game::SpawnBee() {
-    Bee* newBee;
+    std::unique_ptr<Bee> newBee;
     int rnd = GenerateRandom(0, 1);
     if (rnd == 0)
-        newBee = new AngryBee();
+        newBee = std::make_unique<AngryBee>();
     else
-        newBee = new Bee();
-
-    newBee->SetPosition({ GenerateRandom(1,6), coloane - 1 });
-    bees.push_back(newBee);
+        newBee = std::make_unique<Bee>();
+    int linie = GenerateRandom(1, 6);
+    newBee->SetPosition({ linie , coloane - 1 });
+    bees.push_back(std::move(newBee));
+    liniiSpawn.resize(randuri);
+    liniiSpawn[linie]++;
+    std::vector<int>v = liniiSpawn;
+    sort(v.rbegin(), v.rend());
+    cout << "Cate albine au fost pe fiecare linie, in ordinea nr de albine: ";
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i] != 0)
+            cout << v[i] << " ";
+        else
+            break;
+    }
+    auto it = find(liniiSpawn.begin(), liniiSpawn.end(), v[0]);
+    cout << "\nLinie preferata: "<<it-liniiSpawn.begin();
+    cout << "\n";
 }
 
 void Game::PrintFlowerCount() {
@@ -107,6 +123,13 @@ void Game::PrintFlowerCount() {
 }
 
 void Game::GameLoop() {
+    std::shared_ptr<Ladybug> bug = std::make_shared<Ladybug>(); 
+    std::shared_ptr<Ladybug> bug2 = std::make_shared<Ladybug>(); 
+    bug2.get()->SetPosition({ 7,4 });
+    bugs.push_back(std::ref(*bug));
+    bugs.push_back(std::ref(*bug2));
+
+
     Player& player = Player::getInstance();
     sf::RenderWindow window(sf::VideoMode(1000, 800), "SFML Blue Background");
     ViewSetter(window);
@@ -132,19 +155,24 @@ void Game::GameLoop() {
                 switch (event.key.code) {
                 case sf::Keyboard::Up:
                     player.MoveUp();
+                    for(auto bugg:bugs)
+                        bugg.get().MoveDown();
                     moveCooldownClock.restart();
                     break;
                 case sf::Keyboard::Down:
                     player.MoveDown();
-                    moveCooldownClock.restart();
+                    for (auto bugg : bugs)
+                        bugg.get().MoveUp();                    moveCooldownClock.restart();
                     break;
                 case sf::Keyboard::Left:
                     player.MoveLeft();
-                    moveCooldownClock.restart();
+                    for (auto bugg : bugs)
+                        bugg.get().MoveRight();                    moveCooldownClock.restart();
                     break;
                 case sf::Keyboard::Right:
                     player.MoveRight();
-                    moveCooldownClock.restart();
+                    for (auto bugg : bugs)
+                        bugg.get().MoveLeft();                    moveCooldownClock.restart();
                     break;
                 default:
                     break;
@@ -238,7 +266,7 @@ void Game::GameLoop() {
                 floor( bees[i]->GetPosition().second) == player1->GetPosition().second)*/
             if(CheckPosition(bees[i],player1))
             {
-                delete(bees[i]);
+                //delete(bees[i]);
                 bees[i] = nullptr;
                 std::swap(bees[i], bees[bees.size() - 1]);
                 bees.pop_back();
@@ -266,23 +294,28 @@ void Game::GameLoop() {
             }
             window.draw(bees[i]->GetImg());
         }
-        for (int i = 1; i < randuri - 1; i++) {
-            for (int j = 1; j < coloane; j++) {
-                if(flori[i][j])
+        for (int i = 0; i < randuri - 1; i++) {
+            for (int j = 0; j < coloane; j++) {
+                if (flori[i][j])
+                {
+                    Player* player1 = &player;
+                    if (CheckPosition(flori[i][j], player1))
+                        cout << "`We are in this toghether!\n";
+                }
                 for (int k = 0; k < bees.size(); k++) {
                     /*if (floor(bees[k]->GetPosition().first) == flori[i][j]->GetPosition().first &&
                         floor(bees[k]->GetPosition().second) <= flori[i][j]->GetPosition().second &&
                         flori[i][j])*/
-                    /*if (floor(bees[k]->GetPosition().first) == i &&
+                    if(floor(bees[k]->GetPosition().first) == i &&
                         floor(bees[k]->GetPosition().second) <= j &&
-                        flori[i][j])*/
-                    if(CheckPosition(bees[k],flori[i][j]))
+                        flori[i][j])
+                    //if(CheckPosition(bees[k],flori[i][j]))
                     {
                         flori[i][j]->Polenizare();//dynamic dispatch
                         player.Detach(flori[i][j]);
                         delete flori[i][j];
                         flori[i][j] = nullptr;
-                        delete(bees[k]);
+                        //delete(bees[k]);
                         bees[k] = nullptr;
                         std::swap(bees[k], bees[bees.size() - 1]);
                         bees.pop_back();
@@ -314,6 +347,8 @@ void Game::GameLoop() {
         }
        
         window.draw(player.GetImg());
+        for(auto bg:bugs)
+            window.draw(bg.get().GetImg());
         window.display();
     }
 }

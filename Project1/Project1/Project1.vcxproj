@@ -169,6 +169,7 @@
     <ClInclude Include="Flower4.h" />
     <ClInclude Include="FlowerFactory.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Ladybug.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Subject.h" />

@@ -52,6 +52,9 @@
     <Filter Include="Source Files\DebugInfo">
       <UniqueIdentifier>{1e705c5a-aaf6-4925-9f5f-64174bd79cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Ladybug">
+      <UniqueIdentifier>{da2850ca-b8e7-42e0-9a3a-3c5ce65482a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Proiect.cpp">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="DebugInfo.h">
       <Filter>Source Files\DebugInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladybug.h">
+      <Filter>Source Files\Ladybug</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
