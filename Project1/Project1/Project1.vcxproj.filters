@@ -40,6 +40,18 @@
     <Filter Include="Source Files\Flower4">
       <UniqueIdentifier>{cfb1151b-e1c5-4c59-a8a1-bd37e6d80753}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FlowerFactory">
+      <UniqueIdentifier>{358f8a0f-ecfa-48e5-93f7-95ea2daa57af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{1280f462-f161-4501-8ee3-6f9ea5ccbdab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observer">
+      <UniqueIdentifier>{c4b63d0b-392b-4286-a179-174748cc6704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DebugInfo">
+      <UniqueIdentifier>{1e705c5a-aaf6-4925-9f5f-64174bd79cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Proiect.cpp">
@@ -71,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Flower4.cpp">
       <Filter>Source Files\Flower4</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +121,21 @@
     </ClInclude>
     <ClInclude Include="Flower4.h">
       <Filter>Source Files\Flower4</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowerFactory.h">
+      <Filter>Source Files\FlowerFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Source Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Source Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugInfo.h">
+      <Filter>Source Files\DebugInfo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

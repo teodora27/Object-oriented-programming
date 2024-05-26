@@ -14,14 +14,18 @@ void Flower::PositiveNumbers(std::pair<int, int>p) {
         throw Exception("Error: Pozitia aleasa pentru floare nu este valida!\n");
 }
 void Flower::SetPosition(std::pair<int, int> newPosition) {
-    try {
         position = newPosition;
+
+   /* try {
         PositiveNumbers(newPosition);
     }
     catch (const Exception& e) {
         std::cout << e.what();
-    }
+    }*/
 
+}
+std::pair<int, int> Flower::GetPosition() {
+    return position;
 }
 int Flower::GetType() { return type; }
 sf::RectangleShape Flower::GetImg()

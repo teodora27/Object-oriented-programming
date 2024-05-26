@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
 using namespace sf;
 using namespace std;
 
@@ -18,11 +19,11 @@ private:
     pair<int, float> position;
     int hp;
     float inner;
+    bool warningPrinted;
 protected:
     float speed;
 public:
     Bee();
-
     void setTexture(Texture* newTexture);
     pair<int, float> GetPosition();
     void SetPosition(pair<int, float> newPosition);

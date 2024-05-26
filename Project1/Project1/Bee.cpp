@@ -1,6 +1,6 @@
 #include "Bee.h"
 
-Bee::Bee() : coloane(10), randuri(8), lungime_patrat(1000.0f / coloane), inaltime_patrat(800.0f / randuri), hp(20), speed(0.5f), inner(0) {
+Bee::Bee() : coloane(10), randuri(8), lungime_patrat(1000.0f / coloane), inaltime_patrat(800.0f / randuri), hp(20), speed(0.5f), inner(0){
     texture = new Texture;
     texture->loadFromFile("bee.png");
 }

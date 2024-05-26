@@ -3,9 +3,12 @@
 #include "Flower2.h"
 #include "Flower3.h"
 #include "Flower4.h"
+#include "Player.h"
+#include "FlowerFactory.h"
 #include <iostream>
 #include <random>
 #include <cmath>
+#include "DebugInfo.h"
 
 
 using namespace sf;
@@ -104,6 +107,7 @@ void Game::PrintFlowerCount() {
 }
 
 void Game::GameLoop() {
+    Player& player = Player::getInstance();
     sf::RenderWindow window(sf::VideoMode(1000, 800), "SFML Blue Background");
     ViewSetter(window);
     LoadFont();
@@ -111,6 +115,8 @@ void Game::GameLoop() {
     MoneyTextSetter();
     int selector = 0;
     bool was_mouse_pressed = false;
+    sf::Clock moveCooldownClock;
+    float moveCooldown = 0.2f;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -119,6 +125,35 @@ void Game::GameLoop() {
                 window.close();
             }
         }
+
+        if (event.type == sf::Event::KeyPressed) {
+            if (moveCooldownClock.getElapsedTime().asSeconds() >= moveCooldown) {
+
+                switch (event.key.code) {
+                case sf::Keyboard::Up:
+                    player.MoveUp();
+                    moveCooldownClock.restart();
+                    break;
+                case sf::Keyboard::Down:
+                    player.MoveDown();
+                    moveCooldownClock.restart();
+                    break;
+                case sf::Keyboard::Left:
+                    player.MoveLeft();
+                    moveCooldownClock.restart();
+                    break;
+                case sf::Keyboard::Right:
+                    player.MoveRight();
+                    moveCooldownClock.restart();
+                    break;
+                default:
+                    break;
+                }
+                player.SetPosition(player.GetPosition());
+            }
+
+        }
+
         bool is_mouse_pressed = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
         sf::Vector2f pos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         for (int j = 1; j <= 4; j++) {
@@ -135,18 +170,30 @@ void Game::GameLoop() {
             for (int j = 1; j < coloane; j++) {
                 if (contains(grid[i][j], pos) && !is_mouse_pressed && was_mouse_pressed && !flori[i][j]) {
                     if (selector != 0) {
-                        if (selector == 1) {
-                            flori[i][j] = new Flower1();
-                        }
-                        if (selector == 2) {
-                            flori[i][j] = new Flower2(); //upcasting
-                        }
-                        if (selector == 3) {
-                            flori[i][j] = new Flower3(); //upcasting
-                        }
-                        if (selector == 4) {
-                            flori[i][j] = new Flower4();
-                        }
+                        //if (selector == 1) {
+                        //    flori[i][j] = new Flower1();
+                        //}
+                        //if (selector == 2) {
+                        //    flori[i][j] = new Flower2(); //upcasting
+                        //}
+                        //if (selector == 3) {
+                        //    flori[i][j] = new Flower3(); //upcasting
+                        //}
+                        //if (selector == 4) {
+                        //    flori[i][j] = new Flower4();
+                        //}
+
+                        // flori[i][j]->SetPosition({ i,j });
+                        //partea comanetata de mai sus s a transformat 
+                        //in urmatoarele 3 randuri
+
+
+                        Flower* newFlower = FlowerFactory::CreateFlower(selector);
+                        newFlower->SetPosition({ i, j });
+                        SetPozitiiPolenizate({ i,j });
+                        flori[i][j] = newFlower;
+                        player.Attach(flori[i][j]);
+                         selector = 0;
 
                         try {
                             Flower1* flower1 = dynamic_cast<Flower1*>(flori[i][j]);
@@ -161,13 +208,13 @@ void Game::GameLoop() {
                             std::cout << "Ai selectat o floare de alt tip!\n";
                         }
 
-                        flori[i][j]->SetPosition({ i,j });
-                        selector = 0;
+                        cout << "Pozitie preferata: " << pozitiePreferata().first << " " << pozitiePreferata().second << "\n";
                     }
                 }
                 if (contains(grid[i][j], pos) && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
                     if (flori[i][j] != nullptr) {
                         flori[i][j]->DeadFlower(); //dynamic dispatch
+                        player.Detach(flori[i][j]);
                         delete flori[i][j];
                         flori[i][j] = nullptr;
                     }
@@ -183,8 +230,20 @@ void Game::GameLoop() {
             beeSpawnClock.restart();
             PrintFlowerCount();
         }
+
         for (int i = 0; i < bees.size(); i++) {
             bees[i]->Move(dt);
+            Player* player1 = &player;
+            /*if (floor(bees[i]->GetPosition().first) == player1->GetPosition().first &&
+                floor( bees[i]->GetPosition().second) == player1->GetPosition().second)*/
+            if(CheckPosition(bees[i],player1))
+            {
+                delete(bees[i]);
+                bees[i] = nullptr;
+                std::swap(bees[i], bees[bees.size() - 1]);
+                bees.pop_back();
+            }
+                
         }
 
         window.clear();
@@ -193,20 +252,34 @@ void Game::GameLoop() {
                 window.draw(grid[i][j]);
                 if (flori[i][j] != nullptr) {
                     window.draw(flori[i][j]->GetImg());
+                    if (debug) {
+                        DebugInfo<Flower> debugFlower;
+                        debugFlower.print(*flori[i][j]);
+                    }
                 }
             }
         }
         for (int i = 0; i < bees.size(); i++) {
+            if (debug) {
+                DebugInfo<Bee> debugBee;
+                debugBee.print(*bees[i]);
+            }
             window.draw(bees[i]->GetImg());
         }
         for (int i = 1; i < randuri - 1; i++) {
             for (int j = 1; j < coloane; j++) {
+                if(flori[i][j])
                 for (int k = 0; k < bees.size(); k++) {
-                    if (bees[k]->GetPosition().first == i &&
-                        bees[k]->GetPosition().second <= j &&
-                        flori[i][j])
+                    /*if (floor(bees[k]->GetPosition().first) == flori[i][j]->GetPosition().first &&
+                        floor(bees[k]->GetPosition().second) <= flori[i][j]->GetPosition().second &&
+                        flori[i][j])*/
+                    /*if (floor(bees[k]->GetPosition().first) == i &&
+                        floor(bees[k]->GetPosition().second) <= j &&
+                        flori[i][j])*/
+                    if(CheckPosition(bees[k],flori[i][j]))
                     {
                         flori[i][j]->Polenizare();//dynamic dispatch
+                        player.Detach(flori[i][j]);
                         delete flori[i][j];
                         flori[i][j] = nullptr;
                         delete(bees[k]);
@@ -239,6 +312,8 @@ void Game::GameLoop() {
             varray[3].texCoords = sf::Vector2f(texture->getSize().x, 0);
             window.draw(varray, texture);
         }
+       
+        window.draw(player.GetImg());
         window.display();
     }
 }

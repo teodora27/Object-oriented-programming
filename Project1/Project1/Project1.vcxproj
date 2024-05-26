@@ -148,6 +148,7 @@
     <ClCompile Include="Flower3.cpp" />
     <ClCompile Include="Flower4.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Proiect.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,13 +160,18 @@
   <ItemGroup>
     <ClInclude Include="AngryBee.h" />
     <ClInclude Include="Bee.h" />
+    <ClInclude Include="DebugInfo.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Flower.h" />
     <ClInclude Include="Flower1.h" />
     <ClInclude Include="Flower2.h" />
     <ClInclude Include="Flower3.h" />
     <ClInclude Include="Flower4.h" />
+    <ClInclude Include="FlowerFactory.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Subject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
