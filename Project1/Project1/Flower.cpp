@@ -70,5 +70,16 @@ void Flower::SelectPrincipalFlower() {
     std::cout << "Ai selectat o floare ";
 }
 
+void Flower::Update() {
+    Player& player = Player::getInstance();
+    std::pair<int, int> pos = player.GetPosition();
+    if (this != nullptr && pos.first >= 1 && pos.first < 7 && pos.second >= 1) {
+        std::cout << "Ma descurc eu cu albinele\n";
+        hp++;
+    }
+    else if (this != nullptr) {
+        std::cout << "Florile se descurca ele\n";
+    }
+}
 
 int Flower::count = -4;

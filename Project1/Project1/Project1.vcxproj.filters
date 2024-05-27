@@ -90,6 +90,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
+    <ClCompile Include="FlowerFactory.cpp">
+      <Filter>Source Files\FlowerFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="Ladybug.cpp">
+      <Filter>Source Files\Ladybug</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\Users\cojoc\Downloads\poza1bun.jpg" />

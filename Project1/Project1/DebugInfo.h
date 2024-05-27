@@ -10,6 +10,3 @@ public:
         std::cout << "Pozitie: " << object.GetPosition().first << " " << object.GetPosition().second << std::endl;
     }
 };
-// la Flower si la Bee adaugi o functie cu acelasi nume, 
-// acelasi tip de date returnat si acelasi tip de parametrii
-// clasele template NU, NICIODATA, Never nu le spargi in .cpp (preferabil stergi comentariul asta in viitor)

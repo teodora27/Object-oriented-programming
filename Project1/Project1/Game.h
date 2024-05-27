@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <map>
+#include <memory>
+#include <functional>
 #include "Flower.h"
 #include "Bee.h"
 #include "AngryBee.h"
@@ -28,31 +31,21 @@ private:
     const float beeMovementInterval = 2.0f;
     sf::Text moneyText;
     bool debug = false;
-    std::map<std::pair<int, int>, int>pozitiiAdaugate;
-    std::vector<int>liniiSpawn;
+    std::map<std::pair<int, int>, int> pozitiiAdaugate;
+    std::vector<int> liniiSpawn;
     std::vector<std::reference_wrapper<Ladybug>> bugs;
 
 public:
+    Game();
+
     template <typename T1, typename T2>
-    bool CheckPosition(T1& ob1,T2& ob2) {
+    bool CheckPosition(T1& ob1, T2& ob2) {
         return floor(ob1->GetPosition().first) == ob2->GetPosition().first &&
             floor(ob1->GetPosition().second) == ob2->GetPosition().second;
     }
-    void SetPozitiiPolenizate(std::pair<int, int>p) {
-        pozitiiAdaugate[p]++;
-    }
-    std::pair<int, int>pozitiePreferata() {
-        std::pair<int, int>maxi;
-        int maxim = 0;
-        for (auto& x : pozitiiAdaugate) {
-            if (x.second > maxim) {
-                maxim = x.second;
-                maxi = x.first;
-            }
-        }
-        return maxi;
-    }
-    Game();
+
+    void SetPozitiiPolenizate(std::pair<int, int> p);
+    std::pair<int, int> pozitiePreferata();
 
     void ViewSetter(sf::RenderWindow& window);
     void LoadFont();

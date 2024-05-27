@@ -52,6 +52,22 @@ void Game::LoadFont() {
     }
 }
 
+void Game::SetPozitiiPolenizate(std::pair<int, int> p) {
+    pozitiiAdaugate[p]++;
+}
+
+std::pair<int, int> Game::pozitiePreferata() {
+    std::pair<int, int> maxi;
+    int maxim = 0;
+    for (const auto& x : pozitiiAdaugate) {
+        if (x.second > maxim) {
+            maxim = x.second;
+            maxi = x.first;
+        }
+    }
+    return maxi;
+}
+
 void Game::GridInitializer() {
     grid.resize(randuri, std::vector<sf::RectangleShape>(coloane));
     for (int i = 0; i < randuri; i++) {
@@ -124,6 +140,7 @@ void Game::PrintFlowerCount() {
 
 void Game::GameLoop() {
     std::shared_ptr<Ladybug> bug = std::make_shared<Ladybug>(); 
+    std::shared_ptr<Ladybug> clone = bug->clone();
     std::shared_ptr<Ladybug> bug2 = std::make_shared<Ladybug>(); 
     bug2.get()->SetPosition({ 7,4 });
     bugs.push_back(std::ref(*bug));
@@ -151,6 +168,8 @@ void Game::GameLoop() {
 
         if (event.type == sf::Event::KeyPressed) {
             if (moveCooldownClock.getElapsedTime().asSeconds() >= moveCooldown) {
+                auto cloned = bugs[0].get().clone();
+                cloned->MoveUp();
 
                 switch (event.key.code) {
                 case sf::Keyboard::Up:
@@ -162,17 +181,21 @@ void Game::GameLoop() {
                 case sf::Keyboard::Down:
                     player.MoveDown();
                     for (auto bugg : bugs)
-                        bugg.get().MoveUp();                    moveCooldownClock.restart();
+                        bugg.get().MoveUp();
+                    
+                    moveCooldownClock.restart();
                     break;
                 case sf::Keyboard::Left:
                     player.MoveLeft();
                     for (auto bugg : bugs)
-                        bugg.get().MoveRight();                    moveCooldownClock.restart();
+                        bugg.get().MoveRight();
+                    moveCooldownClock.restart();
                     break;
                 case sf::Keyboard::Right:
                     player.MoveRight();
                     for (auto bugg : bugs)
-                        bugg.get().MoveLeft();                    moveCooldownClock.restart();
+                        bugg.get().MoveLeft();
+                    moveCooldownClock.restart();
                     break;
                 default:
                     break;

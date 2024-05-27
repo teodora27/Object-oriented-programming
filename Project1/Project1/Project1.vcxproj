@@ -147,9 +147,12 @@
     <ClCompile Include="Flower2.cpp" />
     <ClCompile Include="Flower3.cpp" />
     <ClCompile Include="Flower4.cpp" />
+    <ClCompile Include="FlowerFactory.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Ladybug.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Proiect.cpp" />
+    <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\Users\cojoc\Downloads\poza1bun.jpg" />
